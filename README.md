@@ -26,7 +26,7 @@ A lightweight Selenium automation framework using **pytest** to test [`the-inter
 │   ├── helpers.py               # Common actions (login, toggle_checkbox, wait helpers)
 │   ├── pages/
 │   │   ├── base_page.py         # BasePage class with wait utilities
-│   │   ├── checkboxes_page.py  # Checkboxes page object
+│   │   ├── checkboxes_page.py   # Checkboxes page object
 │   │   └── login_page.py        # Login page object
 │   ├── test_checkboxes.py       # Checkbox tests
 │   ├── test_homepage.py         # Homepage test
