@@ -1,11 +1,11 @@
-from selenium.webdriver.common.by import By
-from utils.driver_factory import wait_for_page_load
+# from helpers import toggle_checkbox
+from tests.helpers import toggle_checkbox
 
 def test_checkboxes(driver):
     driver.get("https://the-internet.herokuapp.com/checkboxes")
-    wait_for_page_load(driver)
 
-    checkboxes = driver.find_elements(By.CSS_SELECTOR, "#checkboxes input[type='checkbox']")
+    # First checkbox should toggle to checked
+    assert toggle_checkbox(driver, 1) is True
 
-    wait_for_page_load(driver)
-    assert len(checkboxes) == 2
+    # Second checkbox should toggle to unchecked
+    assert toggle_checkbox(driver, 2) is False
