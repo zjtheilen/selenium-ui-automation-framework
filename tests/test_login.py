@@ -1,6 +1,7 @@
-# from helpers import login
-from tests.helpers import login
+from tests.pages.login_page import LoginPage
 
 def test_login(driver):
-    heading = login(driver)
+    login_page = LoginPage(driver)
+    login_page.load()
+    heading = login_page.login()
     assert "Secure Area" in heading.text
