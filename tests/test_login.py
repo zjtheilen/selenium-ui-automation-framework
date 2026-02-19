@@ -1,17 +1,19 @@
 from selenium.webdriver.common.by import By
-from utils.driver_factory import wait_for_page_load
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 def test_login(driver):
     driver.get("https://the-internet.herokuapp.com/login")
-    wait_for_page_load(driver)
 
-    username_input = driver.find_element(By.ID, "username")
-    password_input = driver.find_element(By.ID, "password")
-    login_button = driver.find_element(By.CSS_SELECTOR, "button.radius")
+    driver.find_element(By.ID, "username").send_keys("tomsmith")
+    driver.find_element(By.ID, "password").send_keys("SuperSecretPassword!")
+    driver.find_element(By.CSS_SELECTOR, "button.radius").click()
 
-    username_input.send_keys("tomsmith")
-    password_input.send_keys("SuperSecretPassword!")
-    login_button.click()
+    wait = WebDriverWait(driver, 10)  # give extra time
 
-    wait_for_page_load(driver)
-    assert "Secure Area" in driver.page_source
+    # Wait for the heading to be visible (not just present in DOM)
+    secure_heading = wait.until(
+        EC.visibility_of_element_located((By.XPATH, "//h2[contains(., 'Secure Area')]"))
+    )
+
+    assert "Secure Area" in secure_heading.text

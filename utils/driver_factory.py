@@ -12,6 +12,14 @@ def create_driver():
     options.add_argument("--disable-gpu")         # avoid GPU rendering issues
     options.add_argument("--disable-extensions")  # disable browser extensions
     options.add_argument("--disable-dev-shm-usage")  # reduce memory issues
+    options.add_argument("--disable-infobars")
+    options.add_argument("--disable-notifications")
+    options.add_argument("--disable-save-password-bubble")
+    options.add_experimental_option("prefs", {
+        "credentials_enable_service": False,
+        "profile.password_manager_enabled": False,
+    })
+    options.add_argument("--user-data-dir=C:/temp/selenium-profile")
 
     service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=options)
