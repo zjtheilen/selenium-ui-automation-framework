@@ -8,10 +8,10 @@ def create_driver():
     """Create a Chrome WebDriver instance with stable options."""
     options = webdriver.ChromeOptions()
     options.add_argument("--start-maximized")
-    options.add_argument("--no-sandbox")
-    options.add_argument("--disable-gpu")
-    options.add_argument("--disable-extensions")
-    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--no-sandbox")          # stability on Windows/CI
+    options.add_argument("--disable-gpu")         # avoid GPU rendering issues
+    options.add_argument("--disable-extensions")  # disable browser extensions
+    options.add_argument("--disable-dev-shm-usage")  # reduce memory issues
 
     service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=options)
