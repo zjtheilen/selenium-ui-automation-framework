@@ -21,7 +21,7 @@ class IframePage(BasePage):
                 EC.presence_of_element_located(self.READONLY_NOTIFICATION)
             )
             return True
-        except:
+        except Exception:
             return False
 
     def get_readonly_notification_text(self):

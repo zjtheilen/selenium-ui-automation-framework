@@ -1,4 +1,3 @@
-import pytest
 from tests.pages.iframe_page import IframePage
 
 def test_iframe_editor(driver):
