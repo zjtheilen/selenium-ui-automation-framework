@@ -9,13 +9,23 @@ class LoginPage(BasePage):
     PASSWORD = (By.ID, "password")
     LOGIN_BUTTON = (By.CSS_SELECTOR, "button.radius")
     SECURE_HEADING = (By.XPATH, "//h2[contains(text(),'Secure Area')]")
+    ERROR_MESSAGE = (By.ID, "flash")  # Or correct locator for the error div
 
     def load(self):
         self.driver.get(self.URL)
 
-    def login(self, username="tomsmith", password="SuperSecretPassword!"):
+    def login(self, username, password, expect_success=True):
+        self.wait_for_element(self.USERNAME).clear()
         self.wait_for_element(self.USERNAME).send_keys(username)
+        self.wait_for_element(self.PASSWORD).clear()
         self.wait_for_element(self.PASSWORD).send_keys(password)
         self.wait_for_clickable(self.LOGIN_BUTTON).click()
-        # Wait for the secure area heading
-        return self.wait_for_element(self.SECURE_HEADING)
+        
+        if expect_success:
+            return self.wait_for_element(self.SECURE_HEADING)
+    
+    def get_error_message(self):
+        error_elem = self.wait_for_element(self.ERROR_MESSAGE)
+        text = error_elem.text.strip()
+        return text.splitlines()[0]
+        # return error_elem.text.strip()
