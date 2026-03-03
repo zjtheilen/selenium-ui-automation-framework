@@ -15,11 +15,11 @@ class FileDownloadPage(BasePage):
     
     def download_all_files(self):
         links = self.wait_for_elements(self.FILE_LINKS)
-        filenames = []
+        filenames = [link.text for link in links]
 
-        for link in links:
-            filenames.append(link.text)
-            link.click()
+        for i in range(len(filenames)):
+            links = self.wait_for_elements(self.FILE_LINKS)
+            links[i].click()
 
         return filenames
     

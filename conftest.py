@@ -2,13 +2,37 @@ import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
-@pytest.fixture
-def driver():
-    options = Options()
-    options.add_argument("--incognito")  # Avoid Chrome popups
-    options.add_argument("--start-maximized")  # Optional: maximize window
-    # options.add_argument("--headless=new")  # Uncomment for headless mode
 
-    driver = webdriver.Chrome(options=options)
+@pytest.fixture
+def driver(tmp_path):
+    download_dir = str(tmp_path)
+
+    chrome_options = Options()
+    chrome_options.add_experimental_option(
+        "prefs",
+        {
+            "download.default_directory": download_dir,
+            "download.prompt_for_download": False,
+            "download.directory_upgrade": True,
+            "safebrowsing.enabled": True,
+        },
+    )
+
+    driver = webdriver.Chrome(options=chrome_options)
+
+    # Enable downloads in headless / Chromium
+    driver.command_executor._commands["send_command"] = (
+        "POST",
+        "/session/$sessionId/chromium/send_command",
+    )
+    driver.execute(
+        "send_command",
+        {
+            "cmd": "Page.setDownloadBehavior",
+            "params": {"behavior": "allow", "downloadPath": download_dir},
+        },
+    )
+
     yield driver
+
     driver.quit()
