@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+
 def wait_for_element(driver, locator, timeout=10):
     """
     Wait until the element is present in the DOM.
@@ -24,7 +25,9 @@ def toggle_checkbox(driver, index=1):
     Works for the-internet checkboxes page.
     Returns True if checkbox is now checked, False otherwise.
     """
-    checkbox = wait_for_element(driver, (By.CSS_SELECTOR, f"#checkboxes input:nth-of-type({index})"))
+    checkbox = wait_for_element(
+        driver, (By.CSS_SELECTOR, f"#checkboxes input:nth-of-type({index})")
+    )
     checkbox.click()
     return checkbox.is_selected()
 
@@ -43,5 +46,9 @@ def login(driver, username="tomsmith", password="SuperSecretPassword!"):
 
     # Wait for Secure Area heading
     wait = WebDriverWait(driver, 10)
-    heading = wait.until(EC.presence_of_element_located((By.XPATH, "//h2[contains(text(),'Secure Area')]")))
+    heading = wait.until(
+        EC.presence_of_element_located(
+            (By.XPATH, "//h2[contains(text(),'Secure Area')]")
+        )
+    )
     return heading

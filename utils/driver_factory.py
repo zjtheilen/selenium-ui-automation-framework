@@ -8,17 +8,20 @@ def create_driver():
     """Create a Chrome WebDriver instance with stable options."""
     options = webdriver.ChromeOptions()
     options.add_argument("--start-maximized")
-    options.add_argument("--no-sandbox")          # stability on Windows/CI
-    options.add_argument("--disable-gpu")         # avoid GPU rendering issues
+    options.add_argument("--no-sandbox")  # stability on Windows/CI
+    options.add_argument("--disable-gpu")  # avoid GPU rendering issues
     options.add_argument("--disable-extensions")  # disable browser extensions
     options.add_argument("--disable-dev-shm-usage")  # reduce memory issues
     options.add_argument("--disable-infobars")
     options.add_argument("--disable-notifications")
     options.add_argument("--disable-save-password-bubble")
-    options.add_experimental_option("prefs", {
-        "credentials_enable_service": False,
-        "profile.password_manager_enabled": False,
-    })
+    options.add_experimental_option(
+        "prefs",
+        {
+            "credentials_enable_service": False,
+            "profile.password_manager_enabled": False,
+        },
+    )
     options.add_argument("--user-data-dir=C:/temp/selenium-profile")
 
     service = Service(ChromeDriverManager().install())

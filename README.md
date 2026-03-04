@@ -6,12 +6,12 @@ A lightweight Selenium automation framework using **pytest** to test [`the-inter
 
 ## Table of Contents
 
-- [Project Structure](#project-structure)  
-- [Setup](#setup)  
-- [Running Tests](#running-tests)  
-- [Helpers](#helpers)  
-- [Page Objects](#page-objects)  
-- [Future Improvements](#future-improvements)  
+- [Project Structure](#project-structure)
+- [Setup](#setup)
+- [Running Tests](#running-tests)
+- [Helpers](#helpers)
+- [Page Objects](#page-objects)
+- [Future Improvements](#future-improvements)
 
 ---
 

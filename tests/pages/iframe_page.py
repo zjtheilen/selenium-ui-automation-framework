@@ -3,6 +3,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from tests.pages.base_page import BasePage
 
+
 class IframePage(BasePage):
     URL = "https://the-internet.herokuapp.com/iframe"
 

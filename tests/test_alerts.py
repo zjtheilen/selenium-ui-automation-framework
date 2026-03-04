@@ -3,10 +3,11 @@ import pytest
 from tests.pages.alerts_page import AlertsPage
 from selenium.common.exceptions import NoAlertPresentException
 
+
 def test_js_alert(driver):
     page = AlertsPage(driver)
     page.load()
-    
+
     page.trigger_alert()
     alert_text = page.get_alert_text()
     page.accept_alert()
@@ -15,12 +16,13 @@ def test_js_alert(driver):
     assert alert_text == "I am a JS Alert"
     assert result_text == "You successfully clicked an alert"
 
+
 @pytest.mark.parametrize(
     "action, expected_text",
     [
         ("accept", "You clicked: Ok"),
         ("dismiss", "You clicked: Cancel"),
-    ]
+    ],
 )
 def test_js_confirm_variations(driver, action, expected_text):
     page = AlertsPage(driver)
@@ -31,8 +33,9 @@ def test_js_confirm_variations(driver, action, expected_text):
         page.accept_alert()
     else:
         page.dismiss_alert()
-    
+
     assert page.get_result_text() == expected_text
+
 
 @pytest.mark.parametrize(
     "input_text, expected",
@@ -50,6 +53,7 @@ def test_js_prompt_variations(driver, input_text, expected):
     page.accept_alert()
 
     assert page.get_result_text() == expected
+
 
 def test_alert_not_present(driver):
     page = AlertsPage(driver)

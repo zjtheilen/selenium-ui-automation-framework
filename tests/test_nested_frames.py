@@ -1,5 +1,6 @@
 from tests.pages.nested_frames_page import NestedFramesPage
 
+
 def test_nested_frames(driver):
     page = NestedFramesPage(driver)
     page.load()

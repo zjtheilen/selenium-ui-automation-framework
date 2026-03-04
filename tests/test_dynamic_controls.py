@@ -1,5 +1,6 @@
 from tests.pages.dynamic_controls_page import DynamicControlsPage
 
+
 def test_enable_input_field(driver):
     page = DynamicControlsPage(driver)
     page.load()

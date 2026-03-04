@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+
 class FileUploadPage:
     FILE_INPUT = (By.ID, "file-upload")
     SUBMIT_BUTTON = (By.ID, "file-submit")
@@ -19,9 +20,7 @@ class FileUploadPage:
     def upload_file(self, file_path=None):
         if file_path:
             abs_path = os.path.abspath(file_path)
-            elem = self.wait.until(
-                EC.presence_of_element_located(self.FILE_INPUT)
-            )
+            elem = self.wait.until(EC.presence_of_element_located(self.FILE_INPUT))
             elem.send_keys(abs_path)
 
         # Always click submit
@@ -37,9 +36,3 @@ class FileUploadPage:
 
     def get_error_message(self):
         return self.driver.page_source
-        # try:
-        #     return self.wait.until(
-        #         EC.presence_of_element_located(self.ERROR_MESSAGE)
-        #     ).text
-        # except Exception:
-        #     return None

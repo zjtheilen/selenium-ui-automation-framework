@@ -1,6 +1,7 @@
 import os
 from tests.pages.file_upload_page import FileUploadPage
 
+
 def test_file_upload(driver):
     page = FileUploadPage(driver)
     page.load()

@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from tests.pages.base_page import BasePage
 
+
 class HoversPage(BasePage):
     URL = "https://the-internet.herokuapp.com/hovers"
 
@@ -17,11 +18,11 @@ class HoversPage(BasePage):
         figure = figures[index]
 
         ActionChains(self.driver).move_to_element(figure).perform()
-    
+
     def get_caption_text(self, index):
         captions = self.wait_for_elements(self.FIGCAPTION)
         return captions[index].text
-    
+
     def is_profile_link_visible(self, index):
         captions = self.wait_for_elements(self.FIGCAPTION)
         link = captions[index].find_element(*self.PROFILE_LINK)

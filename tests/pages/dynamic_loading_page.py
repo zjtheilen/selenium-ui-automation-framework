@@ -3,10 +3,12 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from tests.pages.base_page import BasePage
 
+
 class DynamicLoadingPage(BasePage):
     """
     Handles dynamic loading pages (example 1 and 2) from the-internet.herokuapp.com
     """
+
     BASE_URL = "https://the-internet.herokuapp.com/dynamic_loading"
 
     # Locators

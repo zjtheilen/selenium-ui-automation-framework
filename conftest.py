@@ -1,10 +1,19 @@
+import os
+import shutil
+
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
+DOWNLOAD_DIR = os.path.abspath("downloads")
+
 
 @pytest.fixture
 def driver(tmp_path):
+    if os.path.exists(DOWNLOAD_DIR):
+        shutil.rmtree(DOWNLOAD_DIR)
+    os.makedirs(DOWNLOAD_DIR)
+
     download_dir = str(tmp_path)
 
     chrome_options = Options()

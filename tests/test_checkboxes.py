@@ -1,5 +1,6 @@
 from tests.pages.checkboxes_page import CheckboxesPage
 
+
 def test_checkboxes(driver):
     page = CheckboxesPage(driver)
     page.load()
