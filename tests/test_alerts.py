@@ -15,43 +15,6 @@ def test_js_alert(driver):
     assert alert_text == "I am a JS Alert"
     assert result_text == "You successfully clicked an alert"
 
-# def test_js_confirm_accept(driver):
-#     page = AlertsPage(driver)
-#     page.load()
-
-#     page.trigger_confirm()
-
-#     # alert = driver.switch_to.alert
-#     # alert_text = alert.text
-#     alert_text = page.get_alert_text()
-#     page.accept_alert()
-
-#     # alert.accept()
-
-#     result_text = page.get_result_text()
-
-#     assert alert_text == "I am a JS Confirm"
-#     assert result_text == "You clicked: Ok"
-
-# def test_js_confirm_dismiss(driver):
-#     page = AlertsPage(driver)
-#     page.load()
-
-#     page.trigger_confirm()
-#     alert_text = page.get_alert_text()
-#     page.dismiss_alert()
-
-#     # alert = driver.switch_to.alert
-#     # alert_text = alert.text
-
-#     # alert.dismiss()
-#     result_text = page.get_result_text()
-
-#     # result_text = page.get_result_text()
-
-#     assert alert_text == "I am a JS Confirm"
-#     assert result_text == "You clicked: Cancel"
-
 @pytest.mark.parametrize(
     "action, expected_text",
     [
