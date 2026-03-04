@@ -6,6 +6,7 @@ def test_file_upload(driver):
     page.load()
 
     test_file_path = os.path.abspath("tests/resources/test_file.txt")
-    uploaded_file_name = page.upload_file(test_file_path)
+    page.upload_file(test_file_path)
+    uploaded_file_name = page.get_uploaded_file_name()
 
     assert uploaded_file_name == "test_file.txt"
