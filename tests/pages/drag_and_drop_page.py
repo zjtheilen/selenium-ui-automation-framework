@@ -17,10 +17,9 @@ class DragAndDropPage(BasePage):
         header_a = self.wait_for_element(self.COLUMN_A).find_element(By.TAG_NAME, "header").text
         header_b = self.wait_for_element(self.COLUMN_B).find_element(By.TAG_NAME, "header").text
         return header_a, header_b
-    
-    def drag_and_drop(self):
-        source = self.wait_for_element(self.COLUMN_A)
-        target = self.wait_for_element(self.COLUMN_B)
 
-        actions = ActionChains(self.driver)
-        actions.drag_and_drop(source, target).perform()
+    def drag(self, source_locator, target_locator):
+        source = self.wait_for_element(source_locator)
+        target = self.wait_for_element(target_locator)
+
+        ActionChains(self.driver).drag_and_drop(source, target).perform()
