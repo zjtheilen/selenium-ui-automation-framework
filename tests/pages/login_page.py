@@ -13,9 +13,11 @@ class LoginPage(BasePage):
     ERROR_MESSAGE = (By.ID, "flash")
 
     def load(self):
+        self.logger.info("Loading Login page")
         self.driver.get(self.URL)
 
     def login(self, username, password, expect_success=True):
+        self.logger.info("Performing login")
         self.wait_for_element(self.USERNAME).clear()
         self.wait_for_element(self.USERNAME).send_keys(username)
         self.wait_for_element(self.PASSWORD).clear()
@@ -26,6 +28,7 @@ class LoginPage(BasePage):
             return self.wait_for_element(self.SECURE_HEADING)
 
     def get_error_message(self):
+        self.logger.info("Getting error message")
         error_elem = self.wait_for_element(self.ERROR_MESSAGE)
         text = error_elem.text.strip()
         return text.splitlines()[0]

@@ -13,9 +13,11 @@ from selenium.webdriver.support.ui import WebDriverWait
         ("", "error"),  # empty upload triggers server error
     ],
 )
-def test_file_upload_behavior(driver, file_path, expected_result):
-    page = FileUploadPage(driver)
+def test_file_upload_behavior(driver, file_path, expected_result, logger):
+    page = FileUploadPage(driver, logger)
     page.load()
+
+    logger.info(f"Testing file upload with path: '{file_path}' expecting {expected_result}")
 
     page.upload_file(file_path)
 
@@ -30,3 +32,6 @@ def test_file_upload_behavior(driver, file_path, expected_result):
         )
 
         assert h1_text == "Internal Server Error"
+        logger.info("Received expected error message for invalid file upload")
+    
+    logger.info("File upload test completed with expected result: " + expected_result)

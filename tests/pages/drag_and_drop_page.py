@@ -12,9 +12,11 @@ class DragAndDropPage(BasePage):
     HEADER = (By.TAG_NAME, "header")
 
     def load(self):
+        self.logger.info("Loading Drag and Drop page")
         self.driver.get(self.URL)
 
     def get_column_headers(self):
+        self.logger.info("Getting column headers")
         header_a = (
             self.wait_for_element(self.COLUMN_A)
             .find_element(By.TAG_NAME, "header")
@@ -28,6 +30,7 @@ class DragAndDropPage(BasePage):
         return header_a, header_b
 
     def drag(self, source_locator, target_locator):
+        self.logger.info("Dragging element")
         source = self.wait_for_element(source_locator)
         target = self.wait_for_element(target_locator)
 

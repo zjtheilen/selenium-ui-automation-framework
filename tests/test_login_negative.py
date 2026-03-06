@@ -11,8 +11,13 @@ from tests.pages.login_page import LoginPage
         ("", "", "Your username is invalid!"),
     ],
 )
-def test_login_negative(driver, username, password, expected_error):
-    page = LoginPage(driver)
+def test_login_negative(driver, username, password, expected_error, logger):
+    page = LoginPage(driver, logger)
     page.load()
+
+    logger.info(f"Testing login with username: '{username}' and password: '{password}' expecting error: '{expected_error}'")
+
     page.login(username, password, expect_success=False)
     assert expected_error in page.get_error_message()
+
+    logger.info("Login negative test completed with expected error: " + expected_error)

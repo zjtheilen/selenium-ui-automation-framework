@@ -6,9 +6,11 @@ class NestedFramesPage(BasePage):
     URL = "https://the-internet.herokuapp.com/nested_frames"
 
     def load(self):
+        self.logger.info("Loading Nested Frames page")
         self.driver.get(self.URL)
 
     def get_frame_text(self, frame_path):
+        self.logger.info("Getting frame text")
         self.driver.switch_to.default_content()
         for frame in frame_path:
             self.driver.switch_to.frame(frame)

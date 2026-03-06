@@ -8,13 +8,16 @@ class FileDownloadPage(BasePage):
     FILE_LINKS = (By.CSS_SELECTOR, "div.example a")
 
     def load(self):
+        self.logger.info("Loading File Download page")
         self.driver.get(self.URL)
 
     def get_all_filenames(self):
+        self.logger.info("Getting all filenames")
         links = self.wait_for_elements(self.FILE_LINKS)
         return [link.text for link in links]
 
     def download_all_files(self, limit=None):
+        self.logger.info("Downloading all files")
         links = self.wait_for_elements(self.FILE_LINKS)
         filenames = [link.text for link in links]
 

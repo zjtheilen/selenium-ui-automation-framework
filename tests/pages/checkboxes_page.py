@@ -6,9 +6,11 @@ class CheckboxesPage(BasePage):
     URL = "https://the-internet.herokuapp.com/checkboxes"
 
     def load(self):
+        self.logger.info("Loading Checkboxes page")
         self.driver.get(self.URL)
 
     def toggle_checkbox(self, index=1):
+        self.logger.info(f"Toggle checkbox at index {index}")
         checkbox = self.wait_for_element(
             (By.CSS_SELECTOR, f"#checkboxes input:nth-of-type({index})")
         )

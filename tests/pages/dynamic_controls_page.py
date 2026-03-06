@@ -12,20 +12,21 @@ class DynamicControlsPage(BasePage):
     MESSAGE = (By.ID, "message")
 
     def load(self):
+        self.logger.info("Loading Dynamic Controls page")
         self.driver.get(self.URL)
 
     def enable_input(self):
+        self.logger.info("Enabling input field")
         self.wait_for_clickable(self.ENABLE_BUTTON).click()
         self.wait_for_element(self.MESSAGE)
         return self.wait_for_element(self.INPUT_FIELD).is_enabled()
 
     def enter_text_in_input(self, text):
+        self.logger.info("Entering text in input field")
         input_field = self.wait.until(EC.presence_of_element_located(self.INPUT_FIELD))
         input_field.send_keys(text)
+    
+    def get_input_element(self):
+        self.logger.info("Getting input element")
+        return self.wait.until(EC.presence_of_element_located(self.INPUT_FIELD))
 
-    def test_input_starts_disabled(driver):
-        page = DynamicControlsPage(driver)
-        page.load()
-
-        input_field = page.get_input_element()
-        assert not input_field.is_enabled()
