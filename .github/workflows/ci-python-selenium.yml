@@ -1,0 +1,40 @@
+name: Python Selenium Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: windows-latest
+
+    strategy:
+      matrix:
+        python-version: [3.11]
+
+    steps:
+    - name: Checkout repo
+      uses: github/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+    
+    - name: Install Chrome and WebDriver
+      uses: browser-actions/setup-chrome@v1
+      with:
+        chrome-version: latest
+
+    - name: Run Tests
+      run: |
+        pytest tests/ --maxfail=1 --disable-warnings --html=reports/automation.html --self-contained-html
+      continue-on-error: true
+
+    - name: Upload HTML report
+      uses: actions/upload-artifact@v3
+      with:
+        name: automation-report
+        path: reports/automation.html
+
