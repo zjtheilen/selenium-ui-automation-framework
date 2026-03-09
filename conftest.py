@@ -3,7 +3,9 @@ import shutil
 import time
 import logging
 import pytest
+import base64
 
+from pytest_html import extras
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
@@ -13,10 +15,12 @@ from selenium.webdriver.chrome.options import Options
 DOWNLOAD_DIR = os.path.abspath("downloads")
 SCREENSHOTS_DIR = os.path.abspath("screenshots")
 LOGS_DIR = os.path.abspath("logs")
+REPORTS_DIR = os.path.abspath("reports")
 
 os.makedirs(DOWNLOAD_DIR, exist_ok=True)
 os.makedirs(SCREENSHOTS_DIR, exist_ok=True)
 os.makedirs(LOGS_DIR, exist_ok=True)
+os.makedirs(REPORTS_DIR, exist_ok=True)
 
 # -------------------------------
 # Logger fixture (autouse)
@@ -91,29 +95,27 @@ def driver(tmp_path):
 # -------------------------------
 # Hooks: logging + screenshots
 # -------------------------------
-@pytest.hookimpl(tryfirst=True, hookwrapper=True)
+@pytest.hookimpl(hookwrapper=True)
 def pytest_runtest_makereport(item, call):
-    """Logs test start/end and saves screenshot on failure."""
     outcome = yield
     rep = outcome.get_result()
 
-    # logger = item.funcargs.get("logger")
-
-    # # Log start and end
-    # if logger:
-    #     if rep.when == "setup":
-    #         logger.info(f"Starting test: {item.name}")
-    #     elif rep.when == "teardown":
-    #         logger.info(f"Finished test: {item.name}")
-
-    # Screenshot on failure
     if rep.when == "call" and rep.failed:
         driver = item.funcargs.get("driver")
-        if driver:
+
+        if rep.failed and driver:
             file_name = f"{item.name}_{int(time.time())}.png"
             path = os.path.join(SCREENSHOTS_DIR, file_name)
+
             driver.save_screenshot(path)
             print(f"\nScreenshot saved to {path}")
+
+            if item.config.pluginmanager.hasplugin("html"):
+                extra = getattr(rep, "extra", [])
+                with open(path, "rb") as image_file:
+                    encoded = base64.b64encode(image_file.read()).decode("utf-8")
+                    extra.append(extras.image(encoded, mime_type="image/png"))
+                rep.extra = extra
 
 
 def pytest_runtest_setup(item):
