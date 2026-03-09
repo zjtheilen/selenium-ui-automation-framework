@@ -1,6 +1,11 @@
-testenv/
+# python interpreter
 __pycache__/
+# pytest cache
 .pytest_cache/
-screenshots/
+
+# ignored directories
 downloads/
 logs/
+reports/
+screenshots/
+testenv/

@@ -69,10 +69,10 @@ def driver(tmp_path):
             "safebrowsing.enabled": True,
         },
     )
+    chrome_options.add_argument("--headless=new")
 
     driver = webdriver.Chrome(options=chrome_options)
 
-    # Enable downloads in headless/Chromium
     driver.command_executor._commands["send_command"] = (
         "POST",
         "/session/$sessionId/chromium/send_command",
