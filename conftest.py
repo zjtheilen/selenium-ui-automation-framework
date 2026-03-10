@@ -1,26 +1,27 @@
 import os
-import shutil
 import logging
 import pytest
 import base64
+import re
 
 from pytest_html import extras
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from datetime import datetime
 
+# from tests.helpers import safe_filename
+
 # -------------------------------
 # Constants / directories
 # -------------------------------
-# DOWNLOAD_DIR = os.path.abspath("downloads")
 SCREENSHOTS_DIR = os.path.abspath("screenshots")
 LOGS_DIR = os.path.abspath("logs")
 REPORTS_DIR = os.path.abspath("reports")
 
-# os.makedirs(DOWNLOAD_DIR, exist_ok=True)
 os.makedirs(SCREENSHOTS_DIR, exist_ok=True)
 os.makedirs(LOGS_DIR, exist_ok=True)
 os.makedirs(REPORTS_DIR, exist_ok=True)
+
 
 # -------------------------------
 # Logger fixture (autouse)
@@ -53,6 +54,15 @@ def logger():
 
     return logger
 
+
+@pytest.fixture(scope="session")
+def screenshots_dir(worker_id):
+    base = "screenshots"
+    path = os.path.join(base, worker_id)
+    os.makedirs(path, exist_ok=True)
+    return path
+
+
 # -------------------------------
 # WebDriver fixture
 # -------------------------------
@@ -76,6 +86,7 @@ def driver(tmp_path):
     yield driver
     driver.quit()
 
+
 # -------------------------------
 # Hooks: logging + screenshots
 # -------------------------------
@@ -89,8 +100,10 @@ def pytest_runtest_makereport(item, call):
 
         if rep.failed and driver:
             timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+            worker_id = getattr(item.config, "workerinput", {}).get("workerid", "gw0")
 
-            file_name = f"{item.name}_{timestamp}.png"
+            file_name = f"{worker_id}_{item.nodeid}_{timestamp}.png"
+            file_name = safe_filename(file_name)
             path = os.path.join(SCREENSHOTS_DIR, file_name)
 
             driver.save_screenshot(path)
@@ -98,10 +111,18 @@ def pytest_runtest_makereport(item, call):
 
             if item.config.pluginmanager.hasplugin("html"):
                 extra = getattr(rep, "extra", [])
-                with open(path, "rb") as image_file:
-                    encoded = base64.b64encode(image_file.read()).decode("utf-8")
-                    extra.append(extras.image(encoded, mime_type="image/png"))
-                rep.extra = extra
+
+                try:
+                    with open(path, "wb") as image_file:
+                        encoded = base64.b64encode(image_file.read()).decode("utf-8")
+                        extra.append(extras.image(encoded, mime_type="image/png"))
+                except FileNotFoundError:
+                    print(f"Warning: Screenshot not found for {item.nodeid}")
+                    rep.extra = extra
+
+
+def safe_filename(filename):
+    return re.sub(r'[<>:"/\\|?*]', "_", filename)
 
 
 def pytest_runtest_setup(item):
