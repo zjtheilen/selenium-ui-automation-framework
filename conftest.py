@@ -12,12 +12,12 @@ from datetime import datetime
 # -------------------------------
 # Constants / directories
 # -------------------------------
-DOWNLOAD_DIR = os.path.abspath("downloads")
+# DOWNLOAD_DIR = os.path.abspath("downloads")
 SCREENSHOTS_DIR = os.path.abspath("screenshots")
 LOGS_DIR = os.path.abspath("logs")
 REPORTS_DIR = os.path.abspath("reports")
 
-os.makedirs(DOWNLOAD_DIR, exist_ok=True)
+# os.makedirs(DOWNLOAD_DIR, exist_ok=True)
 os.makedirs(SCREENSHOTS_DIR, exist_ok=True)
 os.makedirs(LOGS_DIR, exist_ok=True)
 os.makedirs(REPORTS_DIR, exist_ok=True)
@@ -28,7 +28,9 @@ os.makedirs(REPORTS_DIR, exist_ok=True)
 @pytest.fixture(scope="session", autouse=True)
 def logger():
     """Returns a logger available to all tests automatically."""
-    log_path = os.path.join(LOGS_DIR, "framework.log")
+    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+
+    log_path = os.path.join(LOGS_DIR, f"framework.log_{timestamp}")
 
     logger = logging.getLogger("selenium_framework")
     logger.setLevel(logging.DEBUG)
@@ -56,18 +58,12 @@ def logger():
 # -------------------------------
 @pytest.fixture
 def driver(tmp_path):
-    # Clean download folder
-    if os.path.exists(DOWNLOAD_DIR):
-        shutil.rmtree(DOWNLOAD_DIR)
-    os.makedirs(DOWNLOAD_DIR)
-
-    download_dir = str(tmp_path)
 
     chrome_options = Options()
     chrome_options.add_experimental_option(
         "prefs",
         {
-            "download.default_directory": download_dir,
+            "download.default_directory": str(tmp_path),
             "download.prompt_for_download": False,
             "download.directory_upgrade": True,
             "safebrowsing.enabled": True,
@@ -76,18 +72,6 @@ def driver(tmp_path):
     chrome_options.add_argument("--headless=new")
 
     driver = webdriver.Chrome(options=chrome_options)
-
-    driver.command_executor._commands["send_command"] = (
-        "POST",
-        "/session/$sessionId/chromium/send_command",
-    )
-    driver.execute(
-        "send_command",
-        {
-            "cmd": "Page.setDownloadBehavior",
-            "params": {"behavior": "allow", "downloadPath": download_dir},
-        },
-    )
 
     yield driver
     driver.quit()
