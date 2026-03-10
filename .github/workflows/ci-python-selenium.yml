@@ -10,7 +10,7 @@ on:
 
 jobs:
   test:
-    runs-on: windows-latest
+    runs-on: windows-2025
 
     strategy:
       matrix:
@@ -18,14 +18,19 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: github/checkout@v3
+        uses: actions/checkout@v3
 
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Install Chrome and WebDriver
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Install Chrome
         uses: browser-actions/setup-chrome@v1
         with:
           chrome-version: latest
