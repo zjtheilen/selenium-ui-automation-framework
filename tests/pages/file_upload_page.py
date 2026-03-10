@@ -21,7 +21,7 @@ class FileUploadPage(BasePage):
         self.driver.get("https://the-internet.herokuapp.com/upload")
 
     def upload_file(self, file_path=None):
-        self.logger.info("Uploading file")  
+        self.logger.info("Uploading file")
         if file_path:
             abs_path = os.path.abspath(file_path)
             elem = self.wait.until(EC.presence_of_element_located(self.FILE_INPUT))

@@ -4,7 +4,6 @@ from tests.pages.base_page import BasePage
 
 
 class AlertsPage(BasePage):
-
     URL = "https://the-internet.herokuapp.com/javascript_alerts"
 
     JS_ALERT_BUTTON = (By.XPATH, "//button[text()='Click for JS Alert']")

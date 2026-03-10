@@ -14,4 +14,7 @@ def test_file_upload(driver, logger):
 
     assert uploaded_file_name == "test_file.txt"
 
-    logger.info("File upload test completed successfully with uploaded file: " + uploaded_file_name)
+    logger.info(
+        "File upload test completed successfully with uploaded file: "
+        + uploaded_file_name
+    )

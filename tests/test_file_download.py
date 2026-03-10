@@ -16,7 +16,7 @@ def test_download_all_files(tmp_path, driver, logger):
     for filename in filenames:
         file_path = wait_for_file(download_dir, filename)
         assert os.path.exists(file_path)
-    
+
     logger.info("All files downloaded successfully")
 
     assert len(os.listdir(download_dir)) == len(filenames)

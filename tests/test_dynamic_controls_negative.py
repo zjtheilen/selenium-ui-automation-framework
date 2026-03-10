@@ -12,8 +12,11 @@ def test_enable_input_negative(driver, logger):
 
     with pytest.raises(ElementNotInteractableException):
         page.enter_text_in_input("text")
-    
-    logger.info("ElementNotInteractableException raised as expected when trying to interact with disabled input field")
+
+    logger.info(
+        "ElementNotInteractableException raised as expected when trying to interact with disabled input field"
+    )
+
 
 def test_input_starts_disabled(driver, logger):
     logger.info("Testing that input field starts disabled")

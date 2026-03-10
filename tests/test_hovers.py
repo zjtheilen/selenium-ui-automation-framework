@@ -14,7 +14,9 @@ def test_hover_reveals_caption(driver, index, expected_name, logger):
     page = HoversPage(driver, logger)
     page.load()
 
-    logger.info(f"Hovering over figure at index: {index} expecting name: {expected_name}")
+    logger.info(
+        f"Hovering over figure at index: {index} expecting name: {expected_name}"
+    )
 
     page.hover_over_figure(index)
 
@@ -25,4 +27,6 @@ def test_hover_reveals_caption(driver, index, expected_name, logger):
 
     assert page.is_profile_link_visible(index)
 
-    logger.info(f"Hover test completed successfully for index: {index} with expected name: {expected_name}")    
+    logger.info(
+        f"Hover test completed successfully for index: {index} with expected name: {expected_name}"
+    )

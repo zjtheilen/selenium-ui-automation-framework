@@ -25,8 +25,7 @@ class DynamicControlsPage(BasePage):
         self.logger.info("Entering text in input field")
         input_field = self.wait.until(EC.presence_of_element_located(self.INPUT_FIELD))
         input_field.send_keys(text)
-    
+
     def get_input_element(self):
         self.logger.info("Getting input element")
         return self.wait.until(EC.presence_of_element_located(self.INPUT_FIELD))
-
