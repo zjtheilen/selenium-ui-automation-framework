@@ -1,6 +1,6 @@
 # Selenium UI Automation Framework
 
-![CI](https://github.com/zjtheilen/selenium-ui-automation-framework/actions/workflows/python-selenium.yml/badge.svg)
+![CI](https://github.com/zjtheilen/selenium-ui-automation-framework/actions/workflows/ci-python-selenium.yml/badge.svg)
 
 A lightweight Selenium automation framework using **pytest** to test  
 [`the-internet.herokuapp.com`](https://the-internet.herokuapp.com/) sample pages.
