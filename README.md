@@ -1,6 +1,7 @@
 # Selenium UI Automation Framework
 
 ![CI](https://github.com/zjtheilen/selenium-ui-automation-framework/actions/workflows/ci-python-selenium.yml/badge.svg)
+![Python](https://img.shields.io/badge/python-3.11-blue)
 
 A lightweight Selenium automation framework using **pytest** to test  
 [`the-internet.herokuapp.com`](https://the-internet.herokuapp.com/) sample pages.
@@ -69,7 +70,6 @@ The project demonstrates modern UI automation practices including:
 │   │   └── nested_frames_page.py       # ""
 │   ├── test_checkboxes.py              # Checkbox tests
 │   ├── test_homepage.py                # ""
-│   ├── test_login.py                   # ""
 │   ├── test_alerts.py                  # ""
 │   ├── test_drag_and_drop.py           # ""
 │   ├── test_dynamic_controls.py        # ""
@@ -77,14 +77,13 @@ The project demonstrates modern UI automation practices including:
 │   ├── test_file_download.py           # ""
 │   ├── test_file_upload.py             # ""
 │   ├── test_file_upload_negative.py    # ""
-│   ├── test_homepage.py                # ""
 │   ├── test_hovers.py                  # ""
 │   ├── test_iframe.py                  # ""
 │   ├── test_login_negative.py          # ""
 │   ├── test_login.py                   # ""
 │   ├── test_nested_frames.py           # ""
 │   └── resources/
-│   │   ├── example_thumbnail.png       # Report thumbnail 
+│   │   ├── example_thumbnail.png       # Report thumbnail
 │   │   ├── invalid_file.txt            # regular text file (assuming website doesn't allow .txt uploads)
 │   │   ├── large_file.pdf              # extremely large file (assuming website doesn't allow massive file uploads)
 │   │   ├── test_file.txt               # another regular text file (assuming website does allow .txt uploads)
@@ -92,7 +91,7 @@ The project demonstrates modern UI automation practices including:
 ├── screenshots/                        # Screenshots captured on test failure
 ├── requirements.txt                    # Python dependencies
 └── README.md                           # README markdown (this file)
-└── .gitignore                  
+└── .gitignore
 └── pytest.ini                          # Pytest configuration
 └── requirements.txt                    # required dependencies
 ```
@@ -154,7 +153,7 @@ Reports are saved to the `reports/` directory.
 
 Example report screenshot:
 
-![Report Example](tests/resources/example_thumbnail.png)
+![Report Example](docs/example_thumbnail.png)
 
 ---
 
@@ -282,3 +281,11 @@ Implemented using **Page Object Model (POM) principles**.
 • Add multi-browser support
 • Integrate Allure reporting
 ```
+
+---
+
+## Demo
+
+Parallel Selenium test execution using **pytest-xdist**.
+
+![Automation Demo](docs/demo.gif)
