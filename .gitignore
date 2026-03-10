@@ -8,4 +8,12 @@ downloads/
 logs/
 reports/
 screenshots/
+
+# virtual environment
 testenv/
+
+# IDE files
+idea/
+
+# VS Code files
+vscode/

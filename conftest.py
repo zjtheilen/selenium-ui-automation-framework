@@ -1,6 +1,5 @@
 import os
 import shutil
-import time
 import logging
 import pytest
 import base64
@@ -8,6 +7,7 @@ import base64
 from pytest_html import extras
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from datetime import datetime
 
 # -------------------------------
 # Constants / directories
@@ -104,7 +104,9 @@ def pytest_runtest_makereport(item, call):
         driver = item.funcargs.get("driver")
 
         if rep.failed and driver:
-            file_name = f"{item.name}_{int(time.time())}.png"
+            timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+
+            file_name = f"{item.name}_{timestamp}.png"
             path = os.path.join(SCREENSHOTS_DIR, file_name)
 
             driver.save_screenshot(path)
@@ -128,3 +130,12 @@ def pytest_runtest_teardown(item, nextitem):
     logger = item.funcargs.get("logger")
     if logger:
         logger.info(f"END TEST: {item.nodeid}")
+
+
+def pytest_configure(config):
+    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    report_dir = "reports"
+    os.makedirs(report_dir, exist_ok=True)
+
+    new_report_name = f"{report_dir}/automation_{timestamp}.html"
+    config.option.htmlpath = new_report_name
