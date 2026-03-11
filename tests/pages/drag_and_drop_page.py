@@ -1,10 +1,12 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
+from config.config import BASE_URL
 from tests.pages.base_page import BasePage
 
 
 class DragAndDropPage(BasePage):
-    URL = "https://the-internet.herokuapp.com/drag_and_drop"
+    
+    URL = BASE_URL + "/drag_and_drop"
 
     COLUMN_A = (By.ID, "column-a")
     COLUMN_B = (By.ID, "column-b")

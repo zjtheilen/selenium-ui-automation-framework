@@ -1,10 +1,12 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
+from config.config import BASE_URL
 from tests.pages.base_page import BasePage
 
 
 class HoversPage(BasePage):
-    URL = "https://the-internet.herokuapp.com/hovers"
+    URL = BASE_URL + "/hovers"
+
 
     FIGURES = (By.CLASS_NAME, "figure")
     FIGCAPTION = (By.CLASS_NAME, "figcaption")

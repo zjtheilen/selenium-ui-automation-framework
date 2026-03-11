@@ -1,11 +1,12 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from config.config import BASE_URL
 from tests.pages.base_page import BasePage
 
 
 class IframePage(BasePage):
-    URL = "https://the-internet.herokuapp.com/iframe"
+    URL = BASE_URL + "/iframe"
 
     # Locators
     IFRAME = (By.ID, "mce_0_ifr")

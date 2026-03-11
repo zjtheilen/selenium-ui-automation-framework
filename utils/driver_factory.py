@@ -3,6 +3,8 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
 
+from config.config import DEFAULT_TIMEOUT
+
 
 def create_driver():
     """Create a Chrome WebDriver instance with stable options."""
@@ -30,7 +32,7 @@ def create_driver():
     return driver
 
 
-def wait_for_page_load(driver, timeout=10):
+def wait_for_page_load(driver, timeout=DEFAULT_TIMEOUT):
     """Wait until the page's document.readyState is 'complete'."""
     WebDriverWait(driver, timeout).until(
         lambda d: d.execute_script("return document.readyState") == "complete"

@@ -2,9 +2,11 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from tests.pages.base_page import BasePage
 
+from config.config import BASE_URL
+
 
 class AlertsPage(BasePage):
-    URL = "https://the-internet.herokuapp.com/javascript_alerts"
+    URL = BASE_URL + "/javascript_alerts"
 
     JS_ALERT_BUTTON = (By.XPATH, "//button[text()='Click for JS Alert']")
     JS_CONFIRM_BUTTON = (By.XPATH, "//button[text()='Click for JS Confirm']")

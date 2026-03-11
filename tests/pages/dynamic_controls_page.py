@@ -1,10 +1,11 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
+from config.config import BASE_URL
 from tests.pages.base_page import BasePage
 
 
 class DynamicControlsPage(BasePage):
-    URL = "https://the-internet.herokuapp.com/dynamic_controls"
+    URL = BASE_URL + "/dynamic_controls"
 
     # Locators
     INPUT_FIELD = (By.CSS_SELECTOR, "#input-example input")

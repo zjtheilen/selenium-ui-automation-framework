@@ -1,9 +1,11 @@
 from selenium.webdriver.common.by import By
+from config.config import BASE_URL
 from tests.pages.base_page import BasePage
 
 
 class LoginPage(BasePage):
-    URL = "https://the-internet.herokuapp.com/login"
+
+    URL = BASE_URL + "/login"
 
     # Locators
     USERNAME = (By.ID, "username")

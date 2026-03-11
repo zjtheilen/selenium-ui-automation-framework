@@ -1,9 +1,10 @@
 from selenium.webdriver.common.by import By
+from config.config import BASE_URL
 from tests.pages.base_page import BasePage
 
 
 class CheckboxesPage(BasePage):
-    URL = "https://the-internet.herokuapp.com/checkboxes"
+    URL = BASE_URL + "/checkboxes"
 
     def load(self):
         self.logger.info("Loading Checkboxes page")

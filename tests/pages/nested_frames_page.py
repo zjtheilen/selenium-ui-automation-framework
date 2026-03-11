@@ -1,9 +1,10 @@
 from selenium.webdriver.common.by import By
+from config.config import BASE_URL
 from tests.pages.base_page import BasePage
 
 
 class NestedFramesPage(BasePage):
-    URL = "https://the-internet.herokuapp.com/nested_frames"
+    URL = BASE_URL + "/nested_frames"
 
     def load(self):
         self.logger.info("Loading Nested Frames page")

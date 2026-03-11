@@ -1,9 +1,10 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from config.config import DEFAULT_TIMEOUT, BASE_URL 
 
 
-def wait_for_element(driver, locator, timeout=10):
+def wait_for_element(driver, locator, timeout=DEFAULT_TIMEOUT):
     """
     Wait until the element is present in the DOM.
     """
@@ -11,7 +12,7 @@ def wait_for_element(driver, locator, timeout=10):
     return wait.until(EC.presence_of_element_located(locator))
 
 
-def wait_for_clickable(driver, locator, timeout=10):
+def wait_for_clickable(driver, locator, timeout=DEFAULT_TIMEOUT):
     """
     Wait until the element is clickable.
     """
@@ -37,7 +38,7 @@ def login(driver, username="tomsmith", password="SuperSecretPassword!"):
     Logs into the-internet login page.
     Waits for the Secure Area page to be loaded.
     """
-    driver.get("https://the-internet.herokuapp.com/login")
+    driver.get(f"{BASE_URL}/login")
 
     # Fill login form
     wait_for_element(driver, (By.ID, "username")).send_keys(username)

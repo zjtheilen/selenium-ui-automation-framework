@@ -9,6 +9,8 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from datetime import datetime
 
+from config.config import HEADLESS
+
 # from tests.helpers import safe_filename
 
 # -------------------------------
@@ -79,7 +81,9 @@ def driver(tmp_path):
             "safebrowsing.enabled": True,
         },
     )
-    chrome_options.add_argument("--headless=new")
+
+    if HEADLESS:
+        chrome_options.add_argument("--headless=new")
 
     driver = webdriver.Chrome(options=chrome_options)
 
@@ -113,7 +117,7 @@ def pytest_runtest_makereport(item, call):
                 extra = getattr(rep, "extra", [])
 
                 try:
-                    with open(path, "wb") as image_file:
+                    with open(path, "rb") as image_file:
                         encoded = base64.b64encode(image_file.read()).decode("utf-8")
                         extra.append(extras.image(encoded, mime_type="image/png"))
                 except FileNotFoundError:

@@ -3,6 +3,14 @@
 ![CI](https://github.com/zjtheilen/selenium-ui-automation-framework/actions/workflows/ci-python-selenium.yml/badge.svg)
 ![Python](https://img.shields.io/badge/python-3.11-blue)
 
+## Demo
+
+Parallel Selenium test execution using **pytest-xdist**.
+
+![Framework Demo](docs/demo.gif)
+
+---
+
 A lightweight Selenium automation framework using **pytest** to test  
 [`the-internet.herokuapp.com`](https://the-internet.herokuapp.com/) sample pages.
 
@@ -281,11 +289,3 @@ Implemented using **Page Object Model (POM) principles**.
 • Add multi-browser support
 • Integrate Allure reporting
 ```
-
----
-
-## Demo
-
-Parallel Selenium test execution using **pytest-xdist**.
-
-![Automation Demo](docs/demo.gif)

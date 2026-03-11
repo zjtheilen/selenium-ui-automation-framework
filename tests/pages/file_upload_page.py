@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+from config.config import BASE_URL, DEFAULT_TIMEOUT
 from tests.pages.base_page import BasePage
 
 
@@ -12,13 +13,14 @@ class FileUploadPage(BasePage):
     UPLOADED_FILE_NAME = (By.ID, "uploaded-files")
     ERROR_MESSAGE = (By.TAG_NAME, "h1")  # Adjust if needed
 
-    def __init__(self, driver, logger, timeout=10):
+    def __init__(self, driver, logger, timeout=DEFAULT_TIMEOUT):
         super().__init__(driver, logger)
         self.wait = WebDriverWait(driver, timeout)
 
     def load(self):
         self.logger.info("Loading File Upload page")
-        self.driver.get("https://the-internet.herokuapp.com/upload")
+        # self.driver.get("https://the-internet.herokuapp.com/upload")
+        self.driver.get(BASE_URL + "/upload")
 
     def upload_file(self, file_path=None):
         self.logger.info("Uploading file")

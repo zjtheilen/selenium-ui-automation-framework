@@ -1,9 +1,11 @@
 from selenium.webdriver.common.by import By
+
+from config.config import BASE_URL
 from .base_page import BasePage
 
 
 class FileDownloadPage(BasePage):
-    URL = "https://the-internet.herokuapp.com/download"
+    URL = BASE_URL + "/download"
 
     FILE_LINKS = (By.CSS_SELECTOR, "div.example a")
 
