@@ -1,5 +1,7 @@
 import os
 import logging
+
+# from urllib import request
 import pytest
 import base64
 import re
@@ -7,9 +9,10 @@ import re
 from pytest_html import extras
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.firefox.service import Service as FirefoxService
 from datetime import datetime
 
-from config.config import HEADLESS
+# from config.config import HEADLESS
 
 # from tests.helpers import safe_filename
 
@@ -69,23 +72,57 @@ def screenshots_dir(worker_id):
 # WebDriver fixture
 # -------------------------------
 @pytest.fixture
-def driver(tmp_path):
+def driver(request, tmp_path):
 
-    chrome_options = Options()
-    chrome_options.add_experimental_option(
-        "prefs",
-        {
+    browser = request.config.getoption("--browser")
+    headless = request.config.getoption("--headless").lower() == "true"
+
+    if browser == "chrome":
+        options = webdriver.ChromeOptions()
+
+        # Headless
+        if headless:
+            options.add_argument("--headless=new")
+
+        # Set download prefs
+        prefs = {
             "download.default_directory": str(tmp_path),
             "download.prompt_for_download": False,
             "download.directory_upgrade": True,
             "safebrowsing.enabled": True,
-        },
-    )
+        }
+        options.add_experimental_option("prefs", prefs)
 
-    if HEADLESS:
-        chrome_options.add_argument("--headless=new")
+        driver = webdriver.Chrome(options=options)
 
-    driver = webdriver.Chrome(options=chrome_options)
+    elif browser == "firefox":
+
+        options = webdriver.FirefoxOptions()
+
+        if headless:
+            options.add_argument("--headless")
+
+        # Set download preferences directly on options
+        options.set_preference("browser.download.folderList", 2)
+        options.set_preference("browser.download.dir", str(tmp_path))
+        options.set_preference(
+            "browser.helperApps.neverAsk.saveToDisk", "application/pdf,image/jpeg"
+        )
+        options.set_preference("pdfjs.disabled", True)
+
+        service = FirefoxService(executable_path=r"C:\Tools\geckodriver.exe")
+        driver = webdriver.Firefox(service=service, options=options)
+
+        # driver = webdriver.Firefox(options=options)
+        # driver = webdriver.Firefox(executable_path=r"C:\Program Files\geckodriver.exe", options=options)
+    
+    else:
+        raise ValueError(f"Unsupported browser: {browser}")
+
+    try:
+        driver.maximize_window()
+    except Exception as e:
+        print(f"Warning: Could not maximize window: {e}")
 
     yield driver
     driver.quit()
@@ -148,3 +185,19 @@ def pytest_configure(config):
 
     new_report_name = f"{report_dir}/automation_{timestamp}.html"
     config.option.htmlpath = new_report_name
+
+
+def pytest_addoption(parser):
+    parser.addoption(
+        "--browser",
+        action="store",
+        default="chrome",
+        help="Browser to run tests on (chrome, firefox, etc.)",
+    )
+
+    parser.addoption(
+        "--headless",
+        action="store",
+        default="true",
+        help="Run tests in headless mode (no browser UI)",
+    )

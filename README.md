@@ -1,6 +1,6 @@
 # Selenium UI Automation Framework
 
-![CI](https://github.com/zjtheilen/selenium-ui-automation-framework/actions/workflows/ci-python-selenium.yml/badge.svg)
+![CI](https://github.com/zjtheilen/selenium-ui-automation-framework/actions/workflows/ci-python-selenium.yml/badge.svg)  
 ![Python](https://img.shields.io/badge/python-3.11-blue)
 
 ## Demo
@@ -16,10 +16,11 @@ A lightweight Selenium automation framework using **pytest** to test
 
 The project demonstrates modern UI automation practices including:
 
-- **Page Object Model (POM) architecture**
-- **Reusable helpers and fixtures**
-- **Automated HTML reporting with screenshots**
-- **Structured logging**
+- **Page Object Model (POM) architecture**  
+- **Reusable helpers and fixtures**  
+- **Automated HTML reporting with screenshots**  
+- **Structured logging**  
+- **Multi-browser support (Chrome, Firefox) with headless option**  
 - **GitHub Actions CI integration**
 
 ---
@@ -27,13 +28,15 @@ The project demonstrates modern UI automation practices including:
 ## Features
 
 ```bash
-✔ Selenium WebDriver automation
-✔ pytest-based test execution
-✔ Page Object Model architecture
-✔ Automatic screenshots on test failure
-✔ HTML test reports with embedded thumbnails
-✔ Structured logging during test execution
-✔ GitHub Actions CI pipeline
+✔ Selenium WebDriver automation  
+✔ pytest-based test execution  
+✔ Page Object Model architecture  
+✔ Automatic screenshots on test failure  
+✔ HTML test reports with embedded thumbnails  
+✔ Structured logging during test execution  
+✔ Multi-browser support (`--browser=chrome|firefox`)  
+✔ Headless or headed mode (`--headless=true|false`)  
+✔ GitHub Actions CI pipeline  
 ✔ Tests executed on every push and pull request
 ```
 
@@ -41,14 +44,14 @@ The project demonstrates modern UI automation practices including:
 
 ## Table of Contents
 
-- [Project Structure](#project-structure)
-- [Setup](#setup)
-- [Running Tests](#running-tests)
-- [Reporting & Screenshots](#reporting--screenshots)
-- [CI/CD Integration](#cicd-integration)
-- [Test Coverage](#test-coverage)
-- [Helpers](#helpers)
-- [Page Objects](#page-objects)
+- [Project Structure](#project-structure)  
+- [Setup](#setup)  
+- [Running Tests](#running-tests)  
+- [Reporting & Screenshots](#reporting--screenshots)  
+- [CI/CD Integration](#cicd-integration)  
+- [Test Coverage](#test-coverage)  
+- [Helpers](#helpers)  
+- [Page Objects](#page-objects)  
 - [Future Improvements](#future-improvements)
 
 ---
@@ -65,43 +68,40 @@ The project demonstrates modern UI automation practices including:
 │   ├── pages/
 │   │   ├── base_page.py                # BasePage class with wait utilities
 │   │   ├── checkboxes_page.py          # Checkboxes page object
-│   │   ├── login_page.py               # ""
-│   │   ├── alerts_page.py              # ""
-│   │   ├── drag_and_drop_page.py       # ""
-│   │   ├── dynamic_controls_page.py    # ""
-│   │   ├── dynamic_loading_page.py     # ""
-│   │   ├── file_download_page.py       # ""
-│   │   ├── file_upload_page.py         # ""
-│   │   ├── hovers_page.py              # ""
-│   │   ├── iframe_page.py              # ""
-│   │   ├── login_page.py               # ""
-│   │   └── nested_frames_page.py       # ""
+│   │   ├── login_page.py               # Login page object
+│   │   ├── alerts_page.py              # Alerts page object
+│   │   ├── drag_and_drop_page.py       # Drag and Drop page object
+│   │   ├── dynamic_controls_page.py    # Dynamic Controls page object
+│   │   ├── dynamic_loading_page.py     # Dynamic Loading page object
+│   │   ├── file_download_page.py       # File Download page object
+│   │   ├── file_upload_page.py         # File Upload page object
+│   │   ├── hovers_page.py              # Hovers page object
+│   │   ├── iframe_page.py              # Iframe page object
+│   │   ├── nested_frames_page.py       # Nested Frames page object
 │   ├── test_checkboxes.py              # Checkbox tests
-│   ├── test_homepage.py                # ""
-│   ├── test_alerts.py                  # ""
-│   ├── test_drag_and_drop.py           # ""
-│   ├── test_dynamic_controls.py        # ""
-│   ├── test_dynamic_loading.py         # ""
-│   ├── test_file_download.py           # ""
-│   ├── test_file_upload.py             # ""
-│   ├── test_file_upload_negative.py    # ""
-│   ├── test_hovers.py                  # ""
-│   ├── test_iframe.py                  # ""
-│   ├── test_login_negative.py          # ""
-│   ├── test_login.py                   # ""
-│   ├── test_nested_frames.py           # ""
-│   └── resources/
-│   │   ├── example_thumbnail.png       # Report thumbnail
-│   │   ├── invalid_file.txt            # regular text file (assuming website doesn't allow .txt uploads)
-│   │   ├── large_file.pdf              # extremely large file (assuming website doesn't allow massive file uploads)
-│   │   ├── test_file.txt               # another regular text file (assuming website does allow .txt uploads)
+│   ├── test_homepage.py                # Homepage tests
+│   ├── test_alerts.py                  # Alerts tests
+│   ├── test_drag_and_drop.py           # Drag and Drop tests
+│   ├── test_dynamic_controls.py        # Dynamic Controls tests
+│   ├── test_dynamic_loading.py         # Dynamic Loading tests
+│   ├── test_file_download.py           # File Download tests
+│   ├── test_file_upload.py             # File Upload tests
+│   ├── test_file_upload_negative.py    # Negative file upload tests
+│   ├── test_hovers.py                  # Hovers tests
+│   ├── test_iframe.py                  # Iframe tests
+│   ├── test_login.py                   # Login tests
+│   ├── test_login_negative.py          # Negative login tests
+│   ├── test_nested_frames.py           # Nested frames tests
+│   └── resources/                      # Test files and thumbnails
+│       ├── example_thumbnail.png
+│       ├── invalid_file.txt
+│       ├── large_file.pdf
+│       └── test_file.txt
 ├── reports/                            # HTML reports generated by pytest-html
 ├── screenshots/                        # Screenshots captured on test failure
 ├── requirements.txt                    # Python dependencies
-└── README.md                           # README markdown (this file)
-└── .gitignore
-└── pytest.ini                          # Pytest configuration
-└── requirements.txt                    # required dependencies
+├── pytest.ini                           # Pytest configuration
+└── README.md                            # This README
 ```
 
 ---
@@ -130,9 +130,20 @@ pip install -r requirements.txt
 
 ## Running Tests
 
+Tests can run on **Chrome** (default) or **Firefox**, and in **headless** or **headed** mode.
+
 ```bash
-# Run all tests
+# Run all tests (default: Chrome, headless)
 pytest
+
+# Run all tests in Firefox
+pytest --browser=firefox
+
+# Run all tests headed (UI visible)
+pytest --headless=false
+
+# Combine browser and headless options
+pytest --browser=firefox --headless=false
 
 # Run a specific test file
 pytest tests/test_login.py
@@ -146,16 +157,57 @@ pytest --html=reports/automation.html --self-contained-html
 
 ---
 
+## Example Test
+
+Here’s a minimal example using the framework to test the login page:
+
+```python
+import pytest
+from tests.pages.login_page import LoginPage
+
+def test_successful_login(driver):
+    """
+    Navigate to the login page, perform a login, 
+    and verify that the Secure Area is visible.
+    """
+    login_page = LoginPage(driver)
+    login_page.load()  # Navigate to login page
+    login_page.login(username="tomsmith", password="SuperSecretPassword!")
+    
+    # Assert that the success message is displayed
+    assert login_page.is_secure_area_displayed()
+```
+
+**Run this test:**
+
+```bash
+pytest -v tests/test_login.py
+```
+
+You can pass **browser** and **headless** options:
+
+```bash
+pytest -v tests/test_login.py --browser=firefox --headless=false
+```
+
+This demonstrates:
+
+- Using a Page Object (`LoginPage`)  
+- Calling helper methods (`login`, `is_secure_area_displayed`)  
+- Running the test with different browsers and headless/headed modes
+
+---
+
 ## Reporting & Screenshots
 
 This framework uses **pytest-html** to generate automated test reports.
 
 Features include:
 
-- Test pass/fail summary
-- Captured logs per test
-- **Automatic screenshots attached to failing tests**
-- Inline image thumbnails within the report
+- Test pass/fail summary  
+- Captured logs per test  
+- **Automatic screenshots attached to failing tests**  
+- Inline image thumbnails within the report  
 
 Reports are saved to the `reports/` directory.
 
@@ -171,11 +223,11 @@ Tests run automatically using **GitHub Actions**.
 
 Pipeline features:
 
-- Runs on **every push and pull request**
-- Uses **Windows runners**
-- Installs **Python and Chrome automatically**
-- Executes the full pytest test suite
-- Uploads the generated **HTML report as a build artifact**
+- Runs on **every push and pull request**  
+- Uses **Windows runners**  
+- Installs **Python and Chrome automatically**  
+- Executes the full pytest test suite  
+- Uploads the generated **HTML report as a build artifact**  
 
 Workflow file location:
 
@@ -282,7 +334,7 @@ Implemented using **Page Object Model (POM) principles**.
 ## Future Improvements
 
 ```bash
-• Add README badges (CI status, Python version)
+• Add additional README badges (CI status, Python version)
 • Expand Page Object coverage to more pages
 • Add configuration file for URLs and timeouts
 • Add parallel test execution (pytest-xdist)
