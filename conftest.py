@@ -80,6 +80,10 @@ def driver(request, tmp_path):
     if browser == "chrome":
         options = webdriver.ChromeOptions()
 
+        options.add_argument("--disable-dev-shm-usage")
+        options.add_argument("--no-sandbox")
+        options.add_argument("--disable-gpu")
+
         # Headless
         if headless:
             options.add_argument("--headless=new")
@@ -96,7 +100,6 @@ def driver(request, tmp_path):
         driver = webdriver.Chrome(options=options)
 
     elif browser == "firefox":
-
         options = webdriver.FirefoxOptions()
 
         if headless:
@@ -115,7 +118,7 @@ def driver(request, tmp_path):
 
         # driver = webdriver.Firefox(options=options)
         # driver = webdriver.Firefox(executable_path=r"C:\Program Files\geckodriver.exe", options=options)
-    
+
     else:
         raise ValueError(f"Unsupported browser: {browser}")
 

@@ -153,6 +153,10 @@ pytest -v
 
 # Generate an HTML report
 pytest --html=reports/automation.html --self-contained-html
+
+# Limit parallel workers
+pytest -n 4 # limit to 4 workers
+pytest -n 0 # do not run parallel
 ```
 
 ---
