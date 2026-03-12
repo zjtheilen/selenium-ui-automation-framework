@@ -1,6 +1,10 @@
+import pytest
+
 from tests.pages.dynamic_controls_page import DynamicControlsPage
 
 
+@pytest.mark.regression
+@pytest.mark.ui
 def test_enable_input_field(driver, logger):
     page = DynamicControlsPage(driver, logger)
     page.load()

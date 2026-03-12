@@ -1,6 +1,10 @@
+import pytest
+
 from tests.pages.checkboxes_page import CheckboxesPage
 
 
+@pytest.mark.regression
+@pytest.mark.ui
 def test_checkboxes(driver, logger):
     page = CheckboxesPage(driver, logger)
     page.load()

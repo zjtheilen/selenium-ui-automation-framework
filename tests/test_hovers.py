@@ -2,6 +2,8 @@ import pytest
 from tests.pages.hovers_page import HoversPage
 
 
+@pytest.mark.regression
+@pytest.mark.ui
 @pytest.mark.parametrize(
     "index, expected_name",
     [

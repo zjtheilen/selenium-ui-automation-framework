@@ -1,6 +1,11 @@
+import pytest
+
 from tests.pages.dynamic_loading_page import DynamicLoadingPage
 
 
+@pytest.mark.regression
+@pytest.mark.ui
+@pytest.mark.slow
 def test_dynamic_loading_example1(driver, logger):
     page = DynamicLoadingPage(driver, logger, example=1)
     page.load()
@@ -13,6 +18,9 @@ def test_dynamic_loading_example1(driver, logger):
     )
 
 
+@pytest.mark.regression
+@pytest.mark.ui
+@pytest.mark.slow
 def test_dynamic_loading_example2(driver, logger):
     page = DynamicLoadingPage(driver, logger, example=2)
     page.load()

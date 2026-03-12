@@ -1,6 +1,10 @@
+import pytest
+
 from tests.pages.login_page import LoginPage
 
 
+@pytest.mark.smoke
+@pytest.mark.ui
 def test_login(driver, logger):
     login_page = LoginPage(driver, logger)
     login_page.load()

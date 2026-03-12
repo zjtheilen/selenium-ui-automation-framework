@@ -1,7 +1,11 @@
 import os
+
+import pytest
 from tests.pages.file_upload_page import FileUploadPage
 
 
+@pytest.mark.regression
+@pytest.mark.ui
 def test_file_upload(driver, logger):
     page = FileUploadPage(driver, logger)
     page.load()

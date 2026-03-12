@@ -1,6 +1,10 @@
+import pytest
+
 from tests.pages.iframe_page import IframePage
 
 
+@pytest.mark.regression
+@pytest.mark.ui
 def test_iframe_editor(driver, logger):
     page = IframePage(driver, logger)
     page.load()

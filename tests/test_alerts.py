@@ -4,6 +4,8 @@ from tests.pages.alerts_page import AlertsPage
 from selenium.common.exceptions import NoAlertPresentException
 
 
+@pytest.mark.regression
+@pytest.mark.ui
 def test_js_alert(driver, logger):
     page = AlertsPage(driver, logger)
     page.load()
@@ -26,6 +28,8 @@ def test_js_alert(driver, logger):
     )
 
 
+@pytest.mark.regression
+@pytest.mark.ui
 @pytest.mark.parametrize(
     "action, expected_text",
     [
@@ -51,6 +55,8 @@ def test_js_confirm_variations(driver, action, expected_text, logger):
     )
 
 
+@pytest.mark.regression
+@pytest.mark.ui
 @pytest.mark.parametrize(
     "input_text, expected",
     [
@@ -74,6 +80,9 @@ def test_js_prompt_variations(driver, input_text, expected, logger):
     )
 
 
+@pytest.mark.regression
+@pytest.mark.ui
+@pytest.mark.negative
 def test_alert_not_present(driver, logger):
     page = AlertsPage(driver, logger)
     page.load()

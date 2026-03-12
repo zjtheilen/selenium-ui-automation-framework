@@ -1,6 +1,10 @@
+import pytest
+
 from tests.pages.nested_frames_page import NestedFramesPage
 
 
+@pytest.mark.regression
+@pytest.mark.ui
 def test_nested_frames(driver, logger):
     page = NestedFramesPage(driver, logger)
     page.load()

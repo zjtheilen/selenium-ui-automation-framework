@@ -2,6 +2,9 @@ import pytest
 from tests.pages.login_page import LoginPage
 
 
+@pytest.mark.regression
+@pytest.mark.ui
+@pytest.mark.negative
 @pytest.mark.parametrize(
     "username, password, expected_error",
     [

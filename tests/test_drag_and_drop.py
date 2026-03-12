@@ -1,6 +1,11 @@
+import pytest
+
 from tests.pages.drag_and_drop_page import DragAndDropPage
 
 
+@pytest.mark.regression
+@pytest.mark.ui
+@pytest.mark.slow
 def test_drag_and_drop(driver, logger):
     page = DragAndDropPage(driver, logger)
     page.load()

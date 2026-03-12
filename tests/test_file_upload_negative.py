@@ -5,6 +5,9 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 
 
+@pytest.mark.regression
+@pytest.mark.ui
+@pytest.mark.negative
 @pytest.mark.parametrize(
     "file_path, expected_result",
     [

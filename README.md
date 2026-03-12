@@ -154,6 +154,24 @@ pytest -v
 # Generate an HTML report
 pytest --html=reports/automation.html --self-contained-html
 
+# Run smoke tests
+pytest -m smoke
+
+# Run full regression suite
+pytest -m regression
+
+# Run tests excluding slow ones
+pytest -m "not slow"
+
+# Run tests involving UI interactions
+pytest -m ui
+
+# Run tests validating error handling or invalid inputs
+pytest -m negative
+
+# Run tests involving waits, downloads, or heavy interactions.
+pytest -m slow
+
 # Limit parallel workers
 pytest -n 4 # limit to 4 workers
 pytest -n 0 # do not run parallel

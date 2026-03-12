@@ -4,6 +4,8 @@ from selenium.common.exceptions import ElementNotInteractableException
 from tests.pages.dynamic_controls_page import DynamicControlsPage
 
 
+@pytest.mark.regression
+@pytest.mark.ui
 def test_enable_input_negative(driver, logger):
     page = DynamicControlsPage(driver, logger)
     page.load()
@@ -18,6 +20,9 @@ def test_enable_input_negative(driver, logger):
     )
 
 
+@pytest.mark.regression
+@pytest.mark.ui
+@pytest.mark.negative
 def test_input_starts_disabled(driver, logger):
     logger.info("Testing that input field starts disabled")
     page = DynamicControlsPage(driver, logger)

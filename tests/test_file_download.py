@@ -1,8 +1,13 @@
 import os
+
+import pytest
 from tests.pages.file_download_page import FileDownloadPage
 from tests.pages.base_page import wait_for_file
 
 
+@pytest.mark.regression
+@pytest.mark.ui
+@pytest.mark.slow
 def test_download_all_files(tmp_path, driver, logger):
     download_dir = str(tmp_path)
 
