@@ -172,7 +172,7 @@ pytest -m negative
 # Run tests involving waits, downloads, or heavy interactions.
 pytest -m slow
 
-# Limit parallel workers
+# Override worker count
 pytest -n 4 # limit to 4 workers
 pytest -n 0 # do not run parallel
 ```
